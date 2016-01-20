@@ -1,19 +1,21 @@
 require('../less/main.less');
-import React from "react";
 
-class MyComponent extends React.Component {
+import React from "react";
+import ReactDOM from "react-dom";
+import Notebooks from "./notebooks"
+import Notes from "./notes"
+import Editor from "./editor"
+
+class App extends React.Component {
   render() {
     return (
-      <ul className="flex-container">
-        <li className="flex-item">1</li>
-        <li className="flex-item">2</li>
-        <li className="flex-item">3</li>
-        <li className="flex-item">4</li>
-        <li className="flex-item">5</li>
-        <li className="flex-item">6</li>
-      </ul>
+      <div className="flex-container">
+        <Notebooks />
+        <Notes />
+        <Editor />
+      </div>
     );
   }
 }
 
-React.render(<MyComponent />, document.getElementById('content'));
+ReactDOM.render(<App />, document.getElementById('content'));
