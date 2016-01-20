@@ -9,7 +9,9 @@ var {Component} = React;
 class NotesApp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = NotesStore.getAllNotes();
+    this.state = {
+      notes: NotesStore.getAllNotes()
+    };
   }
 
   componentDidMount() {
@@ -21,15 +23,17 @@ class NotesApp extends React.Component {
   }
 
   _onChange() {
-    this.setState(NotesStore.getAllNotes());
+    this.setState({
+      notes: NotesStore.getAllNotes()
+    });
   }
 
   render() {
     return (
       <div className="flex-container">
-        <Notebooks />
-        <Notes />
-        <Editor content="haha" />
+        <Notebooks notes={this.state["notes"]}/>
+        <Notes notes={this.state["notes"]}/>
+        <Editor />
       </div>
     );
   }

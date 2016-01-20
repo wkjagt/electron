@@ -1,7 +1,7 @@
 require('../less/main.less');
-import ReactDOM from "react-dom";
+
 import React from "react";
+import ReactDOM from "react-dom"
+import NotesApp from "./components/NotesApp.react"
 
-import App from "./components/app"
-
-ReactDOM.render(<App />, document.getElementById('content'));
+ReactDOM.render(<NotesApp />, document.getElementById('content'));
