@@ -1,7 +1,7 @@
 import React from "react";
-import Notebooks from "./notebooks"
-import Notes from "./notes"
-import Editor from "./editor"
+import Notebooks from "./NoteBooks.react";
+import Notes from "./Notes.react";
+import Editor from "./Editor.react";
 
 var {Component} = React;
 
