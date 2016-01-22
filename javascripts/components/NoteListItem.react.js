@@ -6,7 +6,6 @@ var {Component} = React;
 class NoteListItem extends Component {
   render() {
     let note = this.props.note;
-    console.log(note)
     let selectedClass = this.props.selected ? "selected" : "";
     return(
       <li>

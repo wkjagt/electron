@@ -37,7 +37,7 @@ class NotesApp extends React.Component {
       <div className="flex-container">
         <Notebooks data={this.state} />
         <Notes data={this.state} />
-        <Editor />
+        <Editor note={this.state.selectedNote} />
       </div>
     );
   }
