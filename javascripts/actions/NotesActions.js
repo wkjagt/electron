@@ -13,6 +13,13 @@ var NotesActions = {
       actionType: "select_note",
       note: note
     });
+  },
+
+  updateNote(newContent) {
+    AppDispatcher.dispatch({
+      actionType: "update_note",
+      content: newContent
+    });
   }
 }
 

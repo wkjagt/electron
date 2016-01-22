@@ -1,4 +1,5 @@
 import React from "react";
+import NotesActions from "../actions/NotesActions"
 
 var {Component} = React;
 
@@ -10,20 +11,23 @@ class Editor extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      content: nextProps.note.content
+    });
+  }
+
   render() {
     return(
       <div id="editor">
-        <textarea value={this.state.content} onChange={this._onChange.bind(this)} />
+        <textarea value={this.state.content} onChange={this._handleChange.bind(this)} />
       </div>
     );
   }
 
-  _onChange(event) {
-    this.setState({
-      content: event.target.value
-    });
+  _handleChange(event) {
+    NotesActions.updateNote(event.target.value);
   }
-
 }
 
 module.exports = Editor;
