@@ -7,23 +7,26 @@ class NotesStore extends EventEmitter {
     this._notes = {
       personal: [
         {
-          content: "bla bla",
+          name: "groceries",
+          content: "milk, eggs",
           tags: ["tag1, tag2"]
         }
       ],
       work: [
         {
+          name: "todo",
           content: "foo bar",
           tags: ["tag1"]
         }
       ]
     };
-    this._selectedNoteBook = Object.keys(this._notes)[0];
+    this._selectedNotebook = Object.keys(this._notes)[0];
+    this._selectedNote = this._notes[this._selectedNotebook][0];
   }
 
   selectNotebook(notebook) {
-    if(notebook != this._selectedNoteBook) {
-      this._selectedNoteBook = notebook;
+    if(notebook != this._selectedNotebook) {
+      this._selectedNotebook = notebook;
       this.emit("change");
     }
   }
@@ -33,7 +36,11 @@ class NotesStore extends EventEmitter {
   }
 
   selectedNotebook() {
-    return this._selectedNoteBook;
+    return this._selectedNotebook;
+  }
+
+  selectedNote() {
+    return this._selectedNote;
   }
 
   addChangeListener(callback) {

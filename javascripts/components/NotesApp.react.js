@@ -27,15 +27,16 @@ class NotesApp extends React.Component {
   _getState() {
     return {
       notes: NotesStore.getAllNotes(),
-      selectNotebook: NotesStore.selectedNotebook()
+      selectedNotebook: NotesStore.selectedNotebook(),
+      selectedNote: NotesStore.selectedNote(),
     };
   }
 
   render() {
     return (
       <div className="flex-container">
-        <Notebooks notes={this.state["notes"]} selectedNotebook={this.state["selectNotebook"]} />
-        <Notes notes={this.state["notes"]}/>
+        <Notebooks data={this.state} />
+        <Notes data={this.state} />
         <Editor />
       </div>
     );
