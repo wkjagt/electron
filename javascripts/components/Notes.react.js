@@ -1,4 +1,5 @@
 import React from "react";
+import NoteListItem from "./NoteListItem.react";
 
 var {Component} = React;
 
@@ -10,8 +11,7 @@ class Notes extends Component {
 
     let noteNodes = notes.map((note) => {
       let selected = note.name == selectedNote.name;
-      let selectedClass = selected ? "selected" : "";
-      return(<li key={note.name} className={selectedClass}>{note.name}</li>);
+      return(<NoteListItem key={note.name} note={note} selected={selected} />);
     });
 
     return(

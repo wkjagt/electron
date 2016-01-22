@@ -10,7 +10,13 @@ class NotesStore extends EventEmitter {
           name: "groceries",
           content: "milk, eggs",
           tags: ["tag1, tag2"]
-        }
+        },
+        {
+          name: "to do",
+          content: "buy stuff",
+          tags: ["tag1, tag2"]
+        },
+
       ],
       work: [
         {
@@ -20,13 +26,20 @@ class NotesStore extends EventEmitter {
         }
       ]
     };
-    this._selectedNotebook = Object.keys(this._notes)[0];
-    this._selectedNote = this._notes[this._selectedNotebook][0];
+    this.selectNotebook(Object.keys(this._notes)[0]);
   }
 
   selectNotebook(notebook) {
     if(notebook != this._selectedNotebook) {
       this._selectedNotebook = notebook;
+      this._selectedNote = this._notes[this._selectedNotebook][0];
+      this.emit("change");
+    }
+  }
+
+  selectNote(note) {
+    if(note != this._selectedNote) {
+      this._selectedNote = note;
       this.emit("change");
     }
   }
@@ -58,6 +71,9 @@ AppDispatcher.register((action) => {
   switch(action.actionType) {
     case "select_notebook":
       store.selectNotebook(action.notebook);
+      break;
+    case("select_note"):
+      store.selectNote(action.note);
       break;
   }
 });

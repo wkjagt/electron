@@ -6,6 +6,13 @@ var NotesActions = {
       actionType: "select_notebook",
       notebook: notebook
     });
+  },
+
+  selectNote: (note) => {
+    AppDispatcher.dispatch({
+      actionType: "select_note",
+      note: note
+    });
   }
 }
 
