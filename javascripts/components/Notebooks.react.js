@@ -14,7 +14,8 @@ class Notebooks extends Component {
       return(<NotebookListItem notebook={name} selected={selected} key={name}/>);
     });
     return(
-      <div id="notebooks" className="resizable">
+      <div id="notebooks" className="row">
+        <h2>Notebooks</h2>
         <ul>
           {notebooks}
         </ul>

@@ -7,20 +7,22 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: this.props.note.content
+      note: this.props.note,
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      content: nextProps.note.content
+      note: nextProps.note
     });
   }
 
   render() {
+    let note = this.state.note;
     return(
       <div id="editor">
-        <textarea value={this.state.content} onChange={this._handleChange.bind(this)} />
+        <h2>{note.name}</h2>
+        <textarea value={note.content} onChange={this._handleChange.bind(this)} />
       </div>
     );
   }

@@ -49,6 +49,16 @@ class NotesStore extends EventEmitter {
     this.emit("change");
   }
 
+  createNote(newNoteName) {
+    let newNote = {
+      name: newNoteName,
+      content: "",
+      tags: []
+    }
+    this._notes[this._selectedNotebook].push(newNote);
+    this.selectNote(newNote);
+  }
+
   getAllNotes() {
     return this._notes;
   }
@@ -83,6 +93,9 @@ AppDispatcher.register((action) => {
     case("update_note"):
       store.updateNote(action.content);
       break;
+    case("create_note"):
+      store.createNote(action.newNoteName);
+      break
   }
 });
 
