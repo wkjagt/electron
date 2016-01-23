@@ -5,13 +5,16 @@ var {Component} = React;
 
 class NoteListItem extends Component {
   render() {
-    let note = this.props.note;
     let selectedClass = this.props.selected ? "selected" : "";
     return(
       <li>
-        <a href="#" className={selectedClass} onClick={() => NotesActions.selectNote(note)}>{note.name}</a>
+        <a href="#" className={selectedClass} onClick={this._handleSelectNoteClick.bind(this)}>{this.props.note.name}</a>
       </li>
     );
+  }
+
+  _handleSelectNoteClick() {
+    NotesActions.selectNote(this.props.note)
   }
 }
 

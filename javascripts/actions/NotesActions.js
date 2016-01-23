@@ -22,6 +22,13 @@ var NotesActions = {
     });
   },
 
+  createNotebook(newNotebookName) {
+    AppDispatcher.dispatch({
+      actionType: "create_notebook",
+      newNotebookName: newNotebookName
+    });
+  },
+
   createNote(newNoteName) {
     AppDispatcher.dispatch({
       actionType: "create_note",

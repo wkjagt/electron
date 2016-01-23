@@ -1,5 +1,6 @@
 import React from "react";
 import NotebookListItem from "./NotebookListItem.react";
+import NotesActions from "../actions/NotesActions"
 
 var {Component} = React;
 
@@ -19,8 +20,18 @@ class Notebooks extends Component {
         <ul>
           {notebooks}
         </ul>
+        <form onSubmit={this._handleAddNotebookClick.bind(this)}>
+          <input type="text" ref="newNotebookName" placeholder="Create notebook" />
+          <input type="submit" value="add" />
+        </form>
       </div>
     );
+  }
+
+  _handleAddNotebookClick(event) {
+    let newNotebookName = this.refs.newNotebookName.value;
+    this.refs.newNotebookName.value = "";
+    NotesActions.createNotebook(newNotebookName);
   }
 }
 
