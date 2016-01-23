@@ -31,6 +31,7 @@ class Notes extends Component {
 
   _handleAddNoteClick(event) {
     let newNoteName = this.refs.newNoteName.value;
+    this.refs.newNoteName.value = "";
     NotesActions.createNote(newNoteName);
   }
 }
