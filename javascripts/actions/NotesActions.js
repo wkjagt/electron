@@ -15,9 +15,10 @@ var NotesActions = {
     });
   },
 
-  updateNote(newContent) {
+  updateNote(newTitle, newContent) {
     AppDispatcher.dispatch({
       actionType: "update_note",
+      title: newTitle,
       content: newContent
     });
   },

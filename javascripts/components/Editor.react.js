@@ -19,16 +19,26 @@ class Editor extends Component {
 
   render() {
     let note = this.state.note;
+    let handler = this._handleChange.bind(this);
     return(
       <div id="editor">
-        <h2>{note.name}</h2>
-        <textarea value={note.content} onChange={this._handleChange.bind(this)} />
+        <form>
+          <div>
+            <input type="text" value={note.name} ref="title" onChange={handler} />
+          </div>
+          <div>
+            <textarea value={note.content} ref="content" onChange={handler} />
+          </div>
+        </form>
       </div>
     );
   }
 
   _handleChange(event) {
-    NotesActions.updateNote(event.target.value);
+    let title = this.refs.title.value;
+    let content = this.refs.content.value;
+
+    NotesActions.updateNote(title, content);
   }
 }
 
