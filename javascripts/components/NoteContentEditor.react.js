@@ -10,12 +10,6 @@ class NoteContentEditor extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      note: nextProps.note
-    });
-  }
-
   createMediumConfig() {
     return {
       buttonLabels: "fontawesome"
@@ -24,14 +18,17 @@ class NoteContentEditor extends React.Component {
 
   componentDidMount() {
     this.medium = new MediumEditor(ReactDOM.findDOMNode(this), this.createMediumConfig());
-    this.medium.onHideToolbar = function() {
-      this.setState({ content: this.getDOMNode().innerHTML });
-    }.bind(this);
-    this.medium.subscribe('editableInput', this.props.onChange);
+    this.medium.subscribe('editableInput', this._handleChange.bind(this));
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.state.note.name != nextProps.note.name;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      note: nextProps.note
+    });
   }
 
   componentWillUnmount() {
@@ -41,11 +38,18 @@ class NoteContentEditor extends React.Component {
   render() {
     return (
       <div
+        onChange={this._handleChange.bind(this)}
         id="contentEditor"
         contentEditable="true"
         dangerouslySetInnerHTML={{__html:this.state.note.content}}
       />
     );
+  }
+
+  _handleChange(event) {
+    this.state.note.content = event.target.innerHTML
+    this.setState({ note: this.state.note });
+    this.props.onChange();
   }
 }
 
