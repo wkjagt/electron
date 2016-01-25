@@ -1,4 +1,7 @@
 require('../less/main.less');
+require('medium-editor/dist/css/medium-editor.css');
+require('medium-editor/dist/css/themes/default.css');
+require('font-awesome/css/font-awesome.min.css');
 
 import React from "react";
 import ReactDOM from "react-dom"

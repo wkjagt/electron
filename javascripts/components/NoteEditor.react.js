@@ -1,9 +1,10 @@
 import React from "react";
 import NotesActions from "../actions/NotesActions"
+import NoteContentEditor from "./NoteContentEditor.react";
 
 var {Component} = React;
 
-class Editor extends Component {
+class NoteEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,19 +28,19 @@ class Editor extends Component {
             <input type="text" value={note.name} ref="title" onChange={handler} />
           </div>
           <div>
-            <textarea value={note.content} ref="content" onChange={handler} />
+            <NoteContentEditor onChange={handler} note={note} ref="contentEditor"/>
           </div>
         </form>
       </div>
     );
   }
 
-  _handleChange(event) {
+  _handleChange() {
     let title = this.refs.title.value;
-    let content = this.refs.content.value;
+    let content = this.refs.contentEditor.state.note.content;
 
     NotesActions.updateNote(title, content);
   }
 }
 
-module.exports = Editor;
+module.exports = NoteEditor;

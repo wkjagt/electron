@@ -1,7 +1,7 @@
 import React from "react";
 import Notebooks from "./NoteBooks.react";
 import Notes from "./Notes.react";
-import Editor from "./Editor.react";
+import NoteEditor from "./NoteEditor.react";
 import NotesStore from "../stores/NotesStore";
 
 var {Component} = React;
@@ -37,7 +37,7 @@ class NotesApp extends React.Component {
       <div className="flex-container">
         <Notebooks data={this.state} />
         <Notes data={this.state} />
-        <Editor note={this.state.selectedNote} />
+        <NoteEditor note={this.state.selectedNote} />
       </div>
     );
   }
