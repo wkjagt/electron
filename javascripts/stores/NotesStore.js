@@ -6,38 +6,24 @@ class NotesStore extends EventEmitter {
     super(props);
     AppDispatcher.register((action) => {
       switch(action.actionType) {
+        case "load_notes": return this.loadNotes(action.notes);
         case "select_notebook": return this.selectNotebook(action.notebook);
-        case("select_note"): return this.selectNote(action.note);
-        case("delete_note"): return this.deleteNote(action.note);
-        case("update_note"): return this.updateNote(action.title, action.content);
-        case("create_note"): return this.createNote(action.newNoteName);
-        case("create_notebook"): return this.createNotebook(action.newNotebookName);
+        case "select_note": return this.selectNote(action.note);
+        case "delete_note": return this.deleteNote(action.note);
+        case "update_note": return this.updateNote(action.title, action.content);
+        case "create_note": return this.createNote(action.newNoteName);
+        case "create_notebook": return this.createNotebook(action.newNotebookName);
       }
     });
 
-    this._notes = {
-      personal: [
-        {
-          name: "groceries",
-          content: "milk, eggs",
-          tags: ["tag1, tag2"]
-        },
-        {
-          name: "to do",
-          content: "buy stuff",
-          tags: ["tag1, tag2"]
-        },
+    this._notes = {};
+  }
 
-      ],
-      work: [
-        {
-          name: "todo",
-          content: "foo bar",
-          tags: ["tag1"]
-        }
-      ]
-    };
+  loadNotes(notes) {
+    this._notes = notes;
     this.selectNotebook(Object.keys(this._notes)[0]);
+
+    this.emit("change");
   }
 
   selectNotebook(notebook) {

@@ -3,6 +3,7 @@ import Notebooks from "./NoteBooks.react";
 import Notes from "./Notes.react";
 import NoteEditor from "./NoteEditor.react";
 import NotesStore from "../stores/NotesStore";
+import FileStore from "../stores/FileStore";
 
 var {Component} = React;
 
