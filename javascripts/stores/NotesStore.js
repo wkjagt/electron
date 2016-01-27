@@ -4,6 +4,17 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 class NotesStore extends EventEmitter {
   constructor(props) {
     super(props);
+    AppDispatcher.register((action) => {
+      switch(action.actionType) {
+        case "select_notebook": return this.selectNotebook(action.notebook);
+        case("select_note"): return this.selectNote(action.note);
+        case("delete_note"): return this.deleteNote(action.note);
+        case("update_note"): return this.updateNote(action.title, action.content);
+        case("create_note"): return this.createNote(action.newNoteName);
+        case("create_notebook"): return this.createNotebook(action.newNotebookName);
+      }
+    });
+
     this._notes = {
       personal: [
         {
@@ -42,6 +53,16 @@ class NotesStore extends EventEmitter {
       this._selectedNote = note;
       this.emit("change");
     }
+  }
+
+  deleteNote(toDelete) {
+    for(var note of this._notes[this._selectedNotebook]) {
+      if(toDelete != note) continue;
+
+      let index = this._notes[this._selectedNotebook].indexOf(note);
+      this._notes[this._selectedNotebook].splice(index, 1);
+    }
+    this.emit("change");
   }
 
   updateNote(title, content) {
@@ -92,26 +113,4 @@ class NotesStore extends EventEmitter {
   }
 }
 
-let store = new NotesStore();
-
-AppDispatcher.register((action) => {
-  switch(action.actionType) {
-    case "select_notebook":
-      store.selectNotebook(action.notebook);
-      break;
-    case("select_note"):
-      store.selectNote(action.note);
-      break;
-    case("update_note"):
-      store.updateNote(action.title, action.content);
-      break;
-    case("create_note"):
-      store.createNote(action.newNoteName);
-      break
-    case("create_notebook"):
-      store.createNotebook(action.newNotebookName);
-      break
-  }
-});
-
-module.exports = store;
+module.exports = new NotesStore();

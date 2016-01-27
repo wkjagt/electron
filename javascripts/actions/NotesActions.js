@@ -15,6 +15,13 @@ var NotesActions = {
     });
   },
 
+  deletNote(note) {
+    AppDispatcher.dispatch({
+      actionType: "delete_note",
+      note: note
+    });
+  },
+
   updateNote(newTitle, newContent) {
     AppDispatcher.dispatch({
       actionType: "update_note",
