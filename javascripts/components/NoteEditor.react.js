@@ -21,18 +21,25 @@ class NoteEditor extends Component {
   render() {
     let note = this.state.note;
     let handler = this._handleChange.bind(this);
-    return(
-      <div id="editor">
-        <form>
-          <div>
-            <input type="text" value={note.name} ref="title" onChange={handler} />
-          </div>
-          <div>
-            <NoteContentEditor onChange={handler} note={note} ref="contentEditor"/>
-          </div>
-        </form>
-      </div>
-    );
+
+    if(note) {
+      return(
+        <div id="editor">
+          <form>
+            <div>
+              <input type="text" value={note.name} ref="title" onChange={handler} />
+            </div>
+            <div>
+              <NoteContentEditor onChange={handler} note={note} ref="contentEditor"/>
+            </div>
+          </form>
+        </div>
+      );
+    } else {
+      return(
+        <div>no note</div>
+      );
+    }
   }
 
   _handleChange() {

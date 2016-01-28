@@ -7,7 +7,7 @@ var {Component} = React;
 class Notes extends Component {
   render() {
     let selectedNotebook = this.props.data.selectedNotebook;
-    let notes = this.props.data.notes[selectedNotebook];
+    let notes = this.props.data.notes[selectedNotebook] || [];
     let selectedNote = this.props.data.selectedNote;
 
     let noteNodes = notes.map((note) => {
@@ -30,6 +30,8 @@ class Notes extends Component {
   }
 
   _handleAddNoteClick(event) {
+    event.preventDefault();
+    
     let newNoteName = this.refs.newNoteName.value;
     this.refs.newNoteName.value = "";
     NotesActions.createNote(newNoteName);

@@ -29,6 +29,8 @@ class Notebooks extends Component {
   }
 
   _handleAddNotebookClick(event) {
+    event.preventDefault();
+    
     let newNotebookName = this.refs.newNotebookName.value;
     this.refs.newNotebookName.value = "";
     NotesActions.createNotebook(newNotebookName);

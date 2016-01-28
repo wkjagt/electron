@@ -22,7 +22,8 @@ class NoteContentEditor extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.note.name != nextProps.note.name;
+  //   console.log("shouldComponentUpdate test: " + this.state.note.name + " == " + nextProps.note.name)
+  //   return this.state.note.name != nextProps.note.name;
   }
 
   componentWillReceiveProps(nextProps) {

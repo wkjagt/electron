@@ -17,6 +17,8 @@ class NotesStore extends EventEmitter {
     });
 
     this._notes = {};
+    this._selectedNotebook = null;
+    this._selectedNote = null;
   }
 
   loadNotes(notes) {
