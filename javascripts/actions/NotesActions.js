@@ -13,7 +13,7 @@ var NotesActions = {
     AppDispatcher.dispatch({ actionType: "select_note", note: note});
   },
 
-  deletNote(note) {
+  deleteNote(note) {
     AppDispatcher.dispatch({ actionType: "delete_note", note: note});
   },
 

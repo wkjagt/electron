@@ -15,22 +15,18 @@ class Notebooks extends Component {
       return(<NotebookListItem notebook={name} selected={selected} key={name}/>);
     });
     return(
-      <div id="notebooks" className="row">
-        <h2>Notebooks</h2>
-        <ul>
-          {notebooks}
-        </ul>
+      <nav className="nav-group">
+        <h5 className="nav-group-title">Notebooks</h5>
+        {notebooks}
         <form onSubmit={this._handleAddNotebookClick.bind(this)}>
           <input type="text" ref="newNotebookName" placeholder="Create notebook" />
           <input type="submit" value="add" />
         </form>
-      </div>
+      </nav>
     );
   }
 
   _handleAddNotebookClick(event) {
-    event.preventDefault();
-    
     let newNotebookName = this.refs.newNotebookName.value;
     this.refs.newNotebookName.value = "";
     NotesActions.createNotebook(newNotebookName);

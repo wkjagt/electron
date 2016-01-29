@@ -35,10 +35,23 @@ class NotesApp extends React.Component {
 
   render() {
     return (
-      <div className="flex-container">
-        <Notebooks data={this.state} />
-        <Notes data={this.state} />
-        <NoteEditor note={this.state.selectedNote} />
+      <div>
+        <header className="toolbar toolbar-header">
+          <h1 className="title">Espresso</h1>
+        </header>
+        <div className="window-content">
+          <div className="pane-group">
+            <div className="pane pane-sm sidebar">
+              <Notebooks data={this.state} />
+            </div>
+            <div className="pane pane-sm sidebar">
+              <Notes data={this.state} />
+            </div>
+            <div className="pane">
+              <NoteEditor note={this.state.selectedNote} />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

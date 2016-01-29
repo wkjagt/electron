@@ -22,8 +22,7 @@ class NoteContentEditor extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-  //   console.log("shouldComponentUpdate test: " + this.state.note.name + " == " + nextProps.note.name)
-  //   return this.state.note.name != nextProps.note.name;
+    return true;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,7 +39,8 @@ class NoteContentEditor extends React.Component {
     return (
       <div
         onChange={this._handleChange.bind(this)}
-        id="contentEditor"
+        className="form-control"
+        id="content-editor"
         contentEditable="true"
         dangerouslySetInnerHTML={{__html:this.state.note.content}}
       />

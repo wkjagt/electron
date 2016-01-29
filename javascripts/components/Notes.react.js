@@ -16,22 +16,22 @@ class Notes extends Component {
     });
 
     return(
-      <div id="notes" className="row">
-        <h2>{this.props.data.selectedNotebook}</h2>
-        <ul>
+      <nav className="nav-group">
+        <h5 className="nav-group-title">Notes in "{selectedNotebook}"</h5>
+        <ul className="list-group">
           {noteNodes}
         </ul>
         <form onSubmit={this._handleAddNoteClick.bind(this)}>
           <input type="text" ref="newNoteName" placeholder="Create note" />
           <input type="submit" value="add" />
         </form>
-      </div>
+      </nav>
     );
   }
 
   _handleAddNoteClick(event) {
     event.preventDefault();
-    
+
     let newNoteName = this.refs.newNoteName.value;
     this.refs.newNoteName.value = "";
     NotesActions.createNote(newNoteName);

@@ -24,16 +24,14 @@ class NoteEditor extends Component {
 
     if(note) {
       return(
-        <div id="editor">
-          <form>
-            <div>
-              <input type="text" value={note.name} ref="title" onChange={handler} />
-            </div>
-            <div>
-              <NoteContentEditor onChange={handler} note={note} ref="contentEditor"/>
-            </div>
-          </form>
-        </div>
+        <form>
+          <div className="form-group">
+            <input id="noteTitleInput" className="form-control" type="text" value={note.name} ref="title" onChange={handler} />
+          </div>
+          <div className="form-group">
+            <NoteContentEditor onChange={handler} note={note} ref="contentEditor"/>
+          </div>
+        </form>
       );
     } else {
       return(

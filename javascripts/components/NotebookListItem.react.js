@@ -6,11 +6,12 @@ var {Component} = React;
 class NotebookListItem extends Component {
   render() {
     let notebook = this.props.notebook;
-    let selectedClass = this.props.selected ? "selected" : "";
+    let className = (this.props.selected ? "active " : "") + "nav-group-item";
     return(
-      <li>
-        <a href="#" className={selectedClass} onClick={() => NotesActions.selectNotebook(notebook)}>{notebook}</a>
-      </li>
+      <span className={className} onClick={() => NotesActions.selectNotebook(notebook)}>
+        <span className="icon icon-folder" />
+        <span>{notebook}</span>
+      </span>
     );
   }
 }
