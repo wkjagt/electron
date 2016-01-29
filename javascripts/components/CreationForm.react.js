@@ -11,6 +11,7 @@ class CreationForm extends React.Component {
             type="text"
             placeholder={this.props.placeholder}
             ref={(input) => { if (input != null) { input.focus(); }}}
+            onKeyDown={this.props.keydown}
           />
         </div>
       </form>

@@ -25,10 +25,10 @@ class NoteEditor extends Component {
         <form>
           <div className="form-group">
             <input
+              id="note-title-input"
               className="form-control"
               type="text" value={this.props.note.name}
               ref="title"
-              id="note-title-input"
               onChange={this._changeHandler}
             />
           </div>
