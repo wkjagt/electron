@@ -18,9 +18,7 @@ class Notes extends Component {
     return(
       <nav className="nav-group">
         <h5 className="nav-group-title">Notes in "{selectedNotebook}"</h5>
-        <ul className="list-group">
-          {noteNodes}
-        </ul>
+        <ul className="list-group">{noteNodes}</ul>
       </nav>
     );
   }
