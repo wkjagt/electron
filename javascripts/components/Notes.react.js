@@ -21,20 +21,8 @@ class Notes extends Component {
         <ul className="list-group">
           {noteNodes}
         </ul>
-        <form onSubmit={this._handleAddNoteClick.bind(this)}>
-          <input type="text" ref="newNoteName" placeholder="Create note" />
-          <input type="submit" value="add" />
-        </form>
       </nav>
     );
-  }
-
-  _handleAddNoteClick(event) {
-    event.preventDefault();
-
-    let newNoteName = this.refs.newNoteName.value;
-    this.refs.newNoteName.value = "";
-    NotesActions.createNote(newNoteName);
   }
 }
 

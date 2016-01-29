@@ -17,7 +17,7 @@ class NoteListItem extends Component {
         <div className="media-body">
           <strong>{this.props.note.name}</strong>
           <span className="icon icon-cancel pull-right" onClick={this._handleDeleteNoteClick.bind(this)} />
-          <p>{this.notePreview()}</p>
+          <p><small>{this.notePreview()}</small></p>
         </div>
       </li>
     );
