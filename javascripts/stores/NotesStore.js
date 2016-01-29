@@ -1,12 +1,13 @@
 import {EventEmitter} from 'fbemitter';
 import AppDispatcher from '../dispatcher/AppDispatcher';
+import shortid from "shortid";
 
 class NotesStore extends EventEmitter {
   constructor(props) {
     super(props);
     AppDispatcher.register((action) => {
       switch(action.actionType) {
-        case "load_notes": return this.loadNotes(action.notes);
+        case "load_notebooks": return this.loadNotebooks(action.notebooks);
         case "select_notebook": return this.selectNotebook(action.notebook);
         case "select_note": return this.selectNote(action.note);
         case "delete_note": return this.deleteNote(action.note);
@@ -16,80 +17,91 @@ class NotesStore extends EventEmitter {
       }
     });
 
-    this._notes = {};
-    this._selectedNotebook = null;
-    this._selectedNote = null;
+    this.notebooks = [];
+    this.selectedNotebookId = null;
+    this.selectedNoteId = null;
   }
 
-  loadNotes(notes) {
-    this._notes = notes;
-    this.selectNotebook(Object.keys(this._notes)[0]);
-
-    this.emit("change");
+  loadNotebooks(notebooks) {
+    this.notebooks = notebooks;
+    this.selectNotebook(notebooks[0]);
   }
 
   selectNotebook(notebook) {
-    if(notebook != this._selectedNotebook) {
-      this._selectedNotebook = notebook;
-      this._selectedNote = this._notes[this._selectedNotebook][0];
-      this.emit("change");
+    if(notebook.id != this.selectedNotebookId) {
+      this.selectedNotebookId = notebook.id;
+      if(notebook.notes.length > 0) {
+        this.selectNote(notebook.notes[0]);
+      }
     }
   }
 
   selectNote(note) {
-    if(note != this._selectedNote) {
-      this._selectedNote = note;
+    if(note.id != this.selectedNoteId) {
+      this.selectedNoteId = note.id
       this.emit("change");
     }
   }
 
   deleteNote(toDelete) {
-    for(var note of this._notes[this._selectedNotebook]) {
-      if(toDelete != note) continue;
-
-      let index = this._notes[this._selectedNotebook].indexOf(note);
-      this._notes[this._selectedNotebook].splice(index, 1);
+    for(var notebook of this.notebooks) {
+      for(var note of notebook.notes) {
+        if(toDelete.id == note.id) {
+          notebook.notes.splice(notebook.notes.indexOf(note), 1);
+        }
+      }
     }
     this.emit("change");
   }
 
   updateNote(title, content) {
-    this._selectedNote.name = title;
-    this._selectedNote.content = content;
+    let note = this.getSelectedNote();
+    note.name = title;
+    note.content = content;
     this.emit("change");
   }
 
   createNotebook(newNotebookName) {
-    this._notes[newNotebookName] = [
-      {
-        name: "New note",
-        content: "",
-        tags: []
-      }
-    ];
-    this.selectNotebook(newNotebookName);
+    let newNotebook = {
+      id: shortid.generate(),
+      name: newNotebookName,
+      notes: []
+    };
+    this.notebooks.push(newNotebook);
+    this.selectNotebook(newNotebook);
+
+    this.createNote("New note");
   }
 
   createNote(newNoteName) {
+    let notebook = this.getSelectedNotebook();
     let newNote = {
+      id: shortid.generate(),
       name: newNoteName,
       content: "",
       tags: []
     }
-    this._notes[this._selectedNotebook].push(newNote);
+    notebook.notes.push(newNote);
     this.selectNote(newNote);
   }
 
-  getAllNotes() {
-    return this._notes;
+  getSelectedNotebook() {
+    for(let notebook of this.notebooks) {
+      if(notebook.id == this.selectedNotebookId) {
+        return notebook;
+      }
+    }
   }
 
-  selectedNotebook() {
-    return this._selectedNotebook;
-  }
+  getSelectedNote() {
+    let notebook = this.getSelectedNotebook();
+    if(!notebook) { return; }
 
-  selectedNote() {
-    return this._selectedNote;
+    for(let note of notebook.notes) {
+      if(note.id == this.selectedNoteId) {
+        return note;
+      }
+    }
   }
 
   addChangeListener(callback) {

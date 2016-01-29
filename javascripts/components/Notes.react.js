@@ -6,18 +6,17 @@ var {Component} = React;
 
 class Notes extends Component {
   render() {
-    let selectedNotebook = this.props.data.selectedNotebook;
-    let notes = this.props.data.notes[selectedNotebook] || [];
-    let selectedNote = this.props.data.selectedNote;
+    let notebook = this.props.notebook;
+    let selectedNoteId = this.props.selectedNoteId;
 
-    let noteNodes = notes.map((note) => {
-      let selected = note.name == selectedNote.name;
-      return(<NoteListItem key={note.name} note={note} selected={selected} />);
+    let noteNodes = notebook.notes.map((note) => {
+      let selected = note.id == selectedNoteId;
+      return(<NoteListItem key={note.id} note={note} selected={selected} />);
     });
 
     return(
       <nav className="nav-group">
-        <h5 className="nav-group-title">Notes in "{selectedNotebook}"</h5>
+        <h5 className="nav-group-title">Notes in "{notebook.name}"</h5>
         <ul className="list-group">{noteNodes}</ul>
       </nav>
     );

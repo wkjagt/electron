@@ -1,5 +1,6 @@
 import {EventEmitter} from 'fbemitter';
 import NotesActions from "../actions/NotesActions"
+import shortid from "shortid";
 
 class FileStore extends EventEmitter {
   constructor(props) {
@@ -8,29 +9,39 @@ class FileStore extends EventEmitter {
   }
 
   readFiles() {
-    let notes = {
-      personal: [
-        {
-          name: "groceries",
-          content: "milk, eggs",
-          tags: ["tag1, tag2"]
-        },
-        {
-          name: "to do",
-          content: "buy stuff",
-          tags: ["tag1, tag2"]
-        },
-
-      ],
-      work: [
-        {
-          name: "todo",
-          content: "foo bar",
-          tags: ["tag1"]
-        }
-      ]
-    };
-    NotesActions.loadNotes(notes);
+    let notebooks = [
+      {
+        id: shortid.generate(),
+        name: "personal",
+        notes: [
+          {
+            id: shortid.generate(),
+            name: "groceries",
+            content: "<p><ul><li>milk</li><li>eggs</li></ul></p>",
+            tags: ["tag1, tag2"]
+          },
+          {
+            id: shortid.generate(),
+            name: "to do",
+            content: "<h2>buy stuff</h2>",
+            tags: ["tag1, tag2"]
+          },
+        ]
+      },
+      {
+        id: shortid.generate(),
+        name: "work notes",
+        notes: [
+          {
+            id: shortid.generate(),
+            name: "todo",
+            content: "<p>foo bar</p>",
+            tags: ["tag1"]
+          }
+        ]
+      }
+    ];
+    NotesActions.loadNotebooks(notebooks);
   }
 }
 

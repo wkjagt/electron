@@ -32,11 +32,13 @@ class AppHeader extends React.Component {
   _handleAddNotebook(e) {
     e.preventDefault();
     NotesActions.createNotebook(e.target.getElementsByTagName("input")[0].value);
+    this.setState({creatingNotebook: false, creatingNote: false});
   }
 
   _handleAddNote(e) {
     e.preventDefault();
     NotesActions.createNote(e.target.getElementsByTagName("input")[0].value);
+    this.setState({creatingNotebook: false, creatingNote: false});
   }
 
   render() {

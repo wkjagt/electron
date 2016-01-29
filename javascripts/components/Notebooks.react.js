@@ -6,19 +6,18 @@ var {Component} = React;
 
 class Notebooks extends Component {
   render() {
-    let notes = this.props.data.notes;
-    let notebookNames = Object.keys(notes);
-    let selectedNotebookName = this.props.data.selectedNotebook;
+    let notebooks = this.props.data.notebooks;
+    let selectedNotebookId = this.props.data.selectedNotebookId;
 
-    let notebooks = notebookNames.map((name) => {
-      let selected = selectedNotebookName == name;
-      return(<NotebookListItem notebook={name} selected={selected} key={name}/>);
+    let notebookNodes = notebooks.map((notebook) => {
+      let selected = selectedNotebookId == notebook.id;
+      return(<NotebookListItem notebook={notebook} selected={selected} key={notebook.id}/>);
     });
     return(
       <div>
         <nav className="nav-group">
           <h5 className="nav-group-title">Notebooks</h5>
-          {notebooks}
+          {notebookNodes}
         </nav>
       </div>
     );

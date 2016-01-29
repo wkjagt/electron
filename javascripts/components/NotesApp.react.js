@@ -28,9 +28,9 @@ class NotesApp extends React.Component {
 
   _getState() {
     return {
-      notes: NotesStore.getAllNotes(),
-      selectedNotebook: NotesStore.selectedNotebook(),
-      selectedNote: NotesStore.selectedNote(),
+      notebooks: NotesStore.notebooks,
+      selectedNotebookId: NotesStore.selectedNotebookId,
+      selectedNoteId: NotesStore.selectedNoteId,
     };
   }
 
@@ -44,15 +44,27 @@ class NotesApp extends React.Component {
               <Notebooks data={this.state} />
             </div>
             <div className="pane pane-sm sidebar">
-              <Notes data={this.state} />
+              {this.notes()}
             </div>
             <div className="pane">
-              <NoteEditor note={this.state.selectedNote} />
+              <NoteEditor note={NotesStore.getSelectedNote()} />
             </div>
           </div>
         </div>
       </div>
     );
+  }
+
+  notes() {
+    let selectedNotebook = NotesStore.getSelectedNotebook();
+    if(selectedNotebook) {
+      return(
+        <Notes
+          notebook={selectedNotebook}
+          selectedNoteId={NotesStore.selectedNoteId}
+        />
+      );
+    }
   }
 }
 

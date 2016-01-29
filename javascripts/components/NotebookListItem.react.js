@@ -10,7 +10,7 @@ class NotebookListItem extends Component {
     return(
       <span className={className} onClick={() => NotesActions.selectNotebook(notebook)}>
         <span className="icon icon-folder" />
-        <span>{notebook}</span>
+        <span>{notebook.name}</span>
       </span>
     );
   }

@@ -25,7 +25,8 @@
     "flux": "^2.0.1",
     "fbemitter": "^2.0.0",
     "medium-editor": "5.13.0",
-    "font-awesome": "4.5.0"
+    "font-awesome": "4.5.0",
+    "shortid": "2.2.4"
   },
   "scripts": {
     "start": "./node_modules/electron-prebuilt/dist/Electron.app/Contents/MacOS/Electron .",

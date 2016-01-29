@@ -22,17 +22,11 @@ class NoteContentEditor extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return true;
+    return nextProps.note.id != this.props.note.id;
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      note: nextProps.note
-    });
-  }
-
-  componentWillUnmount() {
-    this.medium.deactivate();
+    this.setState({ note: nextProps.note });
   }
 
   render() {

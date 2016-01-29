@@ -7,6 +7,7 @@ var {Component} = React;
 class NoteEditor extends Component {
   constructor(props) {
     super(props);
+    this._changeHandler = this._handleChange.bind(this);
     this.state = {
       note: this.props.note,
     }
@@ -19,17 +20,20 @@ class NoteEditor extends Component {
   }
 
   render() {
-    let note = this.state.note;
-    let handler = this._handleChange.bind(this);
-
-    if(note) {
+    if(this.props.note) {
       return(
         <form>
           <div className="form-group">
-            <input id="noteTitleInput" className="form-control" type="text" value={note.name} ref="title" onChange={handler} />
+            <input
+              className="form-control"
+              type="text" value={this.props.note.name}
+              ref="title"
+              id="note-title-input"
+              onChange={this._changeHandler}
+            />
           </div>
           <div className="form-group">
-            <NoteContentEditor onChange={handler} note={note} ref="contentEditor"/>
+            <NoteContentEditor onChange={this._changeHandler} note={this.props.note} ref="contentEditor"/>
           </div>
         </form>
       );
@@ -40,7 +44,7 @@ class NoteEditor extends Component {
     }
   }
 
-  _handleChange() {
+  _handleChange(e) {
     let title = this.refs.title.value;
     let content = this.refs.contentEditor.state.note.content;
 

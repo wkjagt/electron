@@ -1,8 +1,8 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 
 var NotesActions = {
-  loadNotes(notes) {
-    AppDispatcher.dispatch({ actionType: "load_notes", notes: notes});
+  loadNotebooks(notebooks) {
+    AppDispatcher.dispatch({ actionType: "load_notebooks", notebooks: notebooks});
   },
 
   selectNotebook(notebook) {
