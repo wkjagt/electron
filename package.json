@@ -27,10 +27,11 @@
     "medium-editor": "5.13.0",
     "font-awesome": "4.5.0",
     "shortid": "2.2.4",
-    "classnames" : "2.2.3"
+    "classnames" : "2.2.3",
   },
   "scripts": {
     "start": "./node_modules/electron-prebuilt/dist/Electron.app/Contents/MacOS/Electron .",
+    "debug": "./node_modules/electron-prebuilt/dist/Electron.app/Contents/MacOS/Electron --debug=5858 .",
     "watch": "./node_modules/.bin/webpack-dev-server",
     "electron-rebuild": "./node_modules/.bin/electron-rebuild"
   }

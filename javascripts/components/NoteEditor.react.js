@@ -8,39 +8,31 @@ class NoteEditor extends Component {
   constructor(props) {
     super(props);
     this._changeHandler = this._handleChange.bind(this);
-    this.state = {
-      note: this.props.note,
-    }
+    this.state = { note: this.props.note };
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      note: nextProps.note
-    });
+    this.setState({ note: nextProps.note });
   }
 
   render() {
     if(this.props.note) {
       return(
         <form>
-          <div className="form-group">
-            <input
-              id="note-title-input"
-              className="form-control"
-              type="text" value={this.props.note.name}
-              ref="title"
-              onChange={this._changeHandler}
-            />
-          </div>
+          <input
+            id="note-title-input"
+            className="form-control"
+            type="text" value={this.props.note.name}
+            ref="title"
+            onChange={this._changeHandler}
+          />
           <div className="form-group">
             <NoteContentEditor onChange={this._changeHandler} note={this.props.note} ref="contentEditor"/>
           </div>
         </form>
       );
     } else {
-      return(
-        <div>no note</div>
-      );
+      return(<div>no note</div>);
     }
   }
 

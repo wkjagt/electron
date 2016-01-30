@@ -6,8 +6,6 @@ import NotesStore from "../stores/NotesStore";
 import FileStore from "../stores/FileStore";
 import AppHeader from "./AppHeader.react";
 
-var {Component} = React;
-
 class NotesApp extends React.Component {
   constructor(props) {
     super(props);

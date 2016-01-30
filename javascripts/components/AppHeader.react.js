@@ -54,13 +54,12 @@ class AppHeader extends React.Component {
   }
 
   render() {
-    let buttons = [this.createNotebookButton(), this.createNoteButton()];
     return(
       <div>
         <header className="toolbar toolbar-header">
           <h1 className="title">Espresso</h1>
           <div className="toolbar-actions">
-            {buttons}
+            {this.createNotebookButton()}{this.createNoteButton()}
           </div>
         </header>
         {this._creationForm()}
