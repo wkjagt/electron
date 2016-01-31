@@ -1,44 +1,66 @@
 var fs = require("fs");
 var recursive = require('recursive-readdir');
 var util = require('util');
+const NOTEBOOKPATH = "/Users/wkjagt/.espresso/notes";
 
-var getNotebooks = function(path) {
-  return fs.readdirSync(path).map(function(filePath){
-    var notebookDir = [path, filePath].join("/");
-    return getNotebook(notebookDir);
+var dump = function(v) {
+  console.log(JSON.stringify(v, null, ' '));
+}
+
+var getNotebooks = function() {
+  return fs.readdirSync(NOTEBOOKPATH).map(function(filename){
+    var notebook = getNotebook(filename);
+    if(!notebook) return;
+    notebook.path = filename;
+    return notebook;
   }).filter(function(n) {return n; });
 }
 
-var getNotebook = function(path) {
-  var info = getNotebookInfo(path);
+var getNotebook = function(filename) {
+  var info = getNotebookInfo(filename);
+
   if(!info) return;
 
-  info.notes = getNotes(path);
+  info.notes = getNotes(filename);
   return info;
 }
 
-var getNotebookInfo = function(path) {
-  var infoPath = [path, "info.json"].join("/");
+var getNotebookDir = function(filename) {
+  return [NOTEBOOKPATH, filename].join("/");
+}
+
+var getInfoFilePath = function(filename) {
+  return [NOTEBOOKPATH, filename, "info.json"].join("/");
+}
+
+var getNotebookInfo = function(filename) {
+  var infoPath = [getNotebookDir(filename), "info.json"].join("/");
   try {
     var infoJSON = fs.readFileSync(infoPath, 'utf8');
     return JSON.parse(infoJSON);
   } catch(e) {}
 }
 
-var getNotes = function(path) {
-  var htmlFiles = fs.readdirSync(path).filter(function(f) {
+var getNotePath = function(notebookFilename, filename) {
+  return [getNotebookDir(notebookFilename), filename].join("/");
+}
+
+var getNotes = function(notebookFilename) {
+  var htmlFiles = fs.readdirSync(getNotebookDir(notebookFilename)).filter(function(f) {
     return f.substr(f.lastIndexOf('.') + 1) == "html";
   });
   return htmlFiles.map(function(filename){
-    var notePath = [path, filename].join("/");
-    return getNote(notePath);
+    var note = getNote(filename, notebookFilename);
+    return note;
   });
 }
 
-var getNote = function(path) {
+var getNote = function(filename, notebookFilename) {
   try {
-    var noteContents = fs.readFileSync(path, 'utf8');
-    return parseNote(noteContents);
+    var noteContents = fs.readFileSync(getNotePath(notebookFilename, filename), 'utf8');
+    var note = parseNote(noteContents);
+    note.path = [notebookFilename, filename].join("/");
+    return note;
   } catch(e) {}
 }
 
@@ -51,8 +73,30 @@ var parseNote = function(contents) {
   } catch(e){}
 }
 
-exports.getNotebooks = getNotebooks;
+var createNotebook = function(info) {
+  info.path = safeDirName(info.name);
 
-// var n = getNotebooks("/Users/wkjagt/.espresso/notes");
-//
-// console.log(util.inspect(n, false, null));
+  if (!fs.existsSync(getNotebookDir(info.path))) {
+    fs.mkdirSync(getNotebookDir(info.path));
+  }
+  writeNotebookInfo(info);
+  return info;
+}
+
+var safeDirName = function(name) {
+  return name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+}
+
+var writeNotebookInfo = function(info) {
+  var infoJSON = JSON.stringify(info, null, '  ');
+  fs.writeFileSync(getInfoFilePath(info.path), infoJSON);
+}
+
+var notebook = createNotebook({
+  id: "3456789",
+  name: "MORE notes"
+});
+dump(notebook);
+
+
+exports.getNotebooks = getNotebooks;

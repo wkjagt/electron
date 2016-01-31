@@ -1,0 +1,33 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/wkjagt/.nvm/versions/io.js/v2.5.0/bin/iojs',
+1 verbose cli   '/Users/wkjagt/.nvm/versions/io.js/v2.5.0/bin/npm',
+1 verbose cli   'run-script',
+1 verbose cli   'debug' ]
+2 info using npm@2.13.2
+3 info using node@v2.5.0
+4 verbose stack Error: Failed to parse json
+4 verbose stack Trailing comma in object at 31:3
+4 verbose stack   },
+4 verbose stack   ^
+4 verbose stack     at parseError (/Users/wkjagt/.nvm/versions/io.js/v2.5.0/lib/node_modules/npm/node_modules/read-package-json/read-json.js:379:11)
+4 verbose stack     at parseJson (/Users/wkjagt/.nvm/versions/io.js/v2.5.0/lib/node_modules/npm/node_modules/read-package-json/read-json.js:68:23)
+4 verbose stack     at /Users/wkjagt/.nvm/versions/io.js/v2.5.0/lib/node_modules/npm/node_modules/read-package-json/read-json.js:48:5
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (evalmachine.<anonymous>:380:3)
+5 verbose cwd /Users/wkjagt/electron/notes
+6 error Darwin 14.5.0
+7 error argv "/Users/wkjagt/.nvm/versions/io.js/v2.5.0/bin/iojs" "/Users/wkjagt/.nvm/versions/io.js/v2.5.0/bin/npm" "run-script" "debug"
+8 error node v2.5.0
+9 error npm  v2.13.2
+10 error file /Users/wkjagt/electron/notes/package.json
+11 error code EJSONPARSE
+12 error Failed to parse json
+12 error Trailing comma in object at 31:3
+12 error   },
+12 error   ^
+13 error File: /Users/wkjagt/electron/notes/package.json
+14 error Failed to parse package.json data.
+14 error package.json must be actual JSON, not just JavaScript.
+14 error
+14 error This is not a bug in npm.
+14 error Tell the package author to fix their package.json file. JSON.parse
+15 verbose exit [ 1, true ]
