@@ -18,8 +18,7 @@ var NotesActions = {
   },
 
   updateNote(newTitle, newContent) {
-    AppDispatcher.dispatch({ actionType: "update_note", title: newTitle,content: newContent
-    });
+    AppDispatcher.dispatch({ actionType: "update_note", title: newTitle,content: newContent});
   },
 
   createNotebook(newNotebookName) {
@@ -28,6 +27,10 @@ var NotesActions = {
 
   createNote(newNoteName) {
     AppDispatcher.dispatch({ actionType: "create_note", newNoteName: newNoteName});
+  },
+
+  saveNotebook(notebook) {
+    AppDispatcher.dispatch({ actionType: "save_notebook", notebook: notebook});
   }
 }
 

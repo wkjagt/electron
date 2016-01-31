@@ -1,5 +1,6 @@
 import {EventEmitter} from 'fbemitter';
 import AppDispatcher from '../dispatcher/AppDispatcher';
+import NotesActions from "../actions/NotesActions"
 import shortid from "shortid";
 
 class NotesStore extends EventEmitter {

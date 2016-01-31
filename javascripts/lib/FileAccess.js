@@ -73,7 +73,7 @@ var parseNote = function(contents) {
   } catch(e){}
 }
 
-var createNotebook = function(info) {
+var saveNotebook = function(info) {
   info.path = safeDirName(info.name);
 
   if (!fs.existsSync(getNotebookDir(info.path))) {
@@ -92,7 +92,7 @@ var writeNotebookInfo = function(info) {
   fs.writeFileSync(getInfoFilePath(info.path), infoJSON);
 }
 
-var notebook = createNotebook({
+var notebook = saveNotebook({
   id: "3456789",
   name: "MORE notes"
 });
